@@ -33,7 +33,10 @@ public class Game {
     private void victory(Player p){
         System.out.println("Congratulations! " + p + " wins!");
     }
-    public boolean equals(){
+    public boolean equals(Game g){
+        if (!this.players[0].equals(g.players[0])) return false;
+        if (!this.players[1].equals(g.players[1])) return false;
+        if (this.pile!=g.pile) return false;
         return true;
     }
 
