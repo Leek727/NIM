@@ -1,9 +1,18 @@
+import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Player {
+    static Scanner sc = new Scanner(System.in);
     String name;
     int points = 0;
 
-    public Player(String name) {
-        this.name = name;
+    public Player(AtomicInteger playerID) {
+        this.name = promptUsername(playerID);
+    }
+
+    String promptUsername(AtomicInteger playerID) {
+        System.out.printf("Enter your username (player %d):", playerID.getAndIncrement());
+        return sc.nextLine();
     }
 
     // Base methods (toString and equals)
