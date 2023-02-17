@@ -34,9 +34,9 @@ public class Game {
 
                 if (pile <= 0){
                     if (i == 0){
-                        victory(players[1]);
+                        victoryRoyale(players[1]);
                     }else{
-                        victory(players[0]);
+                        victoryRoyale(players[0]);
                     }
 
                     System.out.print("Do you want to play again? (y/n): ");
@@ -58,7 +58,7 @@ public class Game {
     }
 
 
-    private void victory(Player p){
+    private void victoryRoyale(Player p){
         System.out.println("Congratulations! " + p + " wins!");
     }
     public boolean equals(Game g){
