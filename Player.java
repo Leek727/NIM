@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Player {
     static Scanner sc = new Scanner(System.in);
     String name;
-    int points = 0;
+    private int points = 0;
 
     public Player(AtomicInteger playerID) {
         this.name = promptUsername(playerID);
@@ -13,6 +13,10 @@ public class Player {
     String promptUsername(AtomicInteger playerID) {
         System.out.printf("Enter your username (player %d):", playerID.getAndIncrement());
         return sc.nextLine();
+    }
+
+    public void AddPoints(int a){
+        this.points += a;
     }
 
     // Base methods (toString and equals)

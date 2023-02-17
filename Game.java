@@ -8,13 +8,11 @@ public class Game {
     public Game(Player a, Player b){
         this.players[0] = a;
         this.players[1] = b;
-        Random r = new Random();
-        pile = (int) (r.nextDouble() * 40 + 10);
     }
     
     public int play(){
         Scanner inp = new Scanner(System.in);
-
+        this.reset();
         while (true){
             for (int i = 0; i < 2; i++){
                 System.out.println("Pile size: " + this.pile);
@@ -26,10 +24,12 @@ public class Game {
                 int remove = inp.nextInt();
                 if (1 <= remove && remove <= (int)pile/2){
                     pile -= remove;
+                    this.players[i].AddPoints(remove);
                 }
                 else{
                     System.out.println("Bad input, removed 1");
                     pile -= 1;
+                    this.players[i].AddPoints(1);
                 }
 
                 if (pile <= 0){
@@ -38,10 +38,23 @@ public class Game {
                     }else{
                         victory(players[0]);
                     }
+
+                    System.out.print("Do you want to play again? (y/n): ");
+                    String ans = inp.nextLine();
+                    ans = inp.nextLine();
+                    if (ans.equals("y")){
+
+                        return this.play();
+                    }
                     return 1;
                 }
             }
         }
+    }
+
+    private void reset(){
+        Random r = new Random();
+        pile = (int) (r.nextDouble() * 40 + 10);
     }
 
 
