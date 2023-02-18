@@ -10,6 +10,7 @@ public class Player {
         this.name = promptUsername(playerID);
     }
 
+    // saves player name
     String promptUsername(AtomicInteger playerID) {
         System.out.printf("Enter your username (player %d):", playerID.getAndIncrement());
         return sc.nextLine();

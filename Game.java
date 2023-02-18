@@ -10,9 +10,10 @@ public class Game {
         this.players[1] = b;
     }
     
+    // main game logic
     public int play(){
         Scanner inp = new Scanner(System.in);
-        this.reset();
+        this.reset(); // generate new pile size and choose first player
         while (true){
             for (int i = 0; i < 2; i++){
                 System.out.println("Pile size: " + this.pile);
@@ -22,20 +23,22 @@ public class Game {
                     System.out.print(this.players[i] + ", how many pieces do you want to remove (1 - " +(int)(pile + .6)/2 + ") ? : ");
                 }
                 int remove = inp.nextInt();
+                // check if user input is within bounds
                 if (1 <= remove && remove <= (int)pile/2){
                     pile -= remove;
-                    this.players[i].AddPoints(remove);
                 }
                 else{
                     System.out.println("Bad input, removed 1");
                     pile -= 1;
-                    this.players[i].AddPoints(1);
                 }
 
+                // check if game over
                 if (pile <= 0){
                     if (i == 0){
+                        this.players[1].AddPoints(1);
                         victoryRoyale(players[1]);
                     }else{
+                        this.players[0].AddPoints(1);
                         victoryRoyale(players[0]);
                     }
 
@@ -52,15 +55,27 @@ public class Game {
         }
     }
 
+    // reset the game
     private void reset(){
         Random r = new Random();
         pile = (int) (r.nextDouble() * 40 + 10);
+
+        // choose random first player
+        if (pile % 2 == 0){
+            Player temp = this.players[0];
+            this.players[0] = this.players[1];
+            this.players[1] = temp;
+        }
+
     }
 
-
+    // print victory message
     private void victoryRoyale(Player p){
         System.out.println("Congratulations! " + p + " wins!");
+        System.out.println(this.players[0]);
+        System.out.println(this.players[1]);
     }
+
     public boolean equals(Game g){
         if (!this.players[0].equals(g.players[0])) return false;
         if (!this.players[1].equals(g.players[1])) return false;
